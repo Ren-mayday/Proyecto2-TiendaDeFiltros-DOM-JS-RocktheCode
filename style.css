@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #f2f2f2;
+}
+
+header {
+  background-color: #272343;
+  display: flex;
+  padding: 40px;
+  width: 100%;
+}
+
+header > img {
+  height: 50px;
+  width: 50px;
+}
+
+nav {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.categoriesList {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+a {
+  color: #f2f2f2;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.rightSideMenu {
+  display: flex;
+  justify-content: space-evenly;
+  width: 20%;
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .categoriesList {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 500px) {
+  header {
+    padding: 10px;
+  }
+
+  nav {
+    flex-direction: column; /* Cambia la dirección del flex para pantallas pequeñas */
+    align-items: flex-start; /* Alinea los elementos al inicio */
+    padding: 10px; /* Añadir padding para que no esté pegado a los bordes */
+  }
+
+  .rightSideMenu {
+    width: 100%; /* Ajusta el ancho para que ocupe el espacio disponible */
+    justify-content: space-around; /* Distribuye los botones de manera uniforme */
+    margin-top: 25px; /* Añadir margen superior si es necesario */
+  }
+
+  .categoriesList {
+    display: none;
+  }
+
+  .hamburgerMenu {
+    display: block;
+    margin-left: auto;
+    height: 40px; /* Ajustar el tamaño del menú hamburguesa para pantallas pequeñas */
+    width: 40px;
+  }
+}
+
+/* Media Query para pantallas muy pequeñas (375px y menos) */
+@media (max-width: 414px) {
+  header {
+    padding: 5px; /* Reducir aún más el padding para pantallas extremadamente pequeñas */
+  }
+
+  .rightSideMenu {
+    width: 100%; /* Asegura que el contenedor derecho ocupe todo el ancho */
+    gap: 5px; /* Reduce el espacio entre los botones si es necesario */
+  }
+
+  .hamburgerMenu {
+    height: 35px; /* Ajustar el tamaño del menú hamburguesa para pantallas pequeñas */
+    width: 35px;
+  }
+}
+
+main {
+  padding: 40px;
+}
+section {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.shoesCard {
+  width: 22%;
+  border-style: solid; /* Estilo de borde sólido */
+  border-width: 1px; /* Grosor del borde, ajusta a 1px para que sea fino */
+  border-color: #d3d3d3; /* Color del borde, un gris claro */
+  padding: 10px; /* Añadir un poco de espacio interno, opcional */
+  margin: 10px; /* Espacio externo entre las tarjetas, opcional */
+  border-radius: 5px; /* Esquinas redondeadas, opcional */
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para el contenedor */
+  background-color: #f9f9f9; /* Fondo claro */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.shoesCard h2 {
+  text-align: left;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.shoesCard p {
+  margin: 0;
+}
+
+.details {
+  margin-top: auto; /* Empuja el contenedor hacia el fondo de la tarjeta si es necesario */
+}
+
+/* Alineación específica de modelo y precio */
+.shoesCard p:first-of-type {
+  text-align: left;
+}
+
+.shoesCard p:last-of-type {
+  text-align: left;
+  font-weight: bold; /* Opción de dar mayor peso al precio */
+}
+
+.shoesCard img {
+  height: auto;
+  max-width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible dentro de la tarjeta */
+  object-fit: contain; /* Ajusta la imagen para que se vea completa dentro de su contenedor */
+}
+
+/* Estilos para el botón comprar */
+.buy-btn {
+  background-color: #f6f6f6; /* Fondo blanco */
+  color: black; /* Texto negro */
+  padding: 10px 20px;
+  border: 2px solid #d3d3d3; /* Borde gris claro */
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.buy-btn:hover {
+  background-color: #fff852; /* Fondo amarillo más oscuro al hacer hover */
+}
+
+/* Media Query para Tablets */
+@media (max-width: 1024px) and (min-width: 735px) {
+  .shoesCard {
+    width: 30%; /* Ajusta el ancho para tabletas */
+  }
+}
+
+/* Media Query para Móviles */
+@media (max-width: 734px) {
+  section {
+    flex-direction: column; /* Cambia a una columna en pantallas pequeñas */
+    align-items: center; /* Centra las tarjetas */
+  }
+
+  .shoesCard {
+    width: 90%; /* Ajusta el ancho para móviles */
+  }
+}
