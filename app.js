@@ -162,7 +162,7 @@ divNavRightSide.className = "rightSideMenu";
 navCategories.appendChild(divNavRightSide);
 
 //!Paso 10: Creo un array buttonNames que serán los nombres de los botones
-const buttonNames = ["Config.", "Cesta", "Perfil"];
+const buttonNames = ["⚙️", "🧺", "Perfil"];
 
 //! Paso 11: Con la ayuda de un for vamos a crear 3 botones extrayendo los nombres del array buttonNames
 for (let index = 0; index < buttonNames.length; index++) {
@@ -180,6 +180,90 @@ for (let index = 0; index < buttonNames.length; index++) {
 //! Paso 1: Selecciono el elemento main
 const main = document.querySelector("main");
 
+//Div para la imagen después del header
+const divCoverImage = document.createElement("div");
+divCoverImage.className = "divCoverImage";
+main.appendChild(divCoverImage);
+
+//Imagen de JD sports
+const imgCover = document.createElement("img");
+imgCover.className = "imgCover";
+imgCover.src = "assets/JD_cover.jpeg";
+divCoverImage.appendChild(imgCover);
+
+// Crear el divFilterButtons justo después de divCoverImage
+const divFilterButtons = document.createElement("div");
+divFilterButtons.className = "divFilterButtons";
+divCoverImage.insertAdjacentElement("afterend", divFilterButtons);
+
+// Array de objetos para los botones de filtros
+const filters = [
+  { name: "Marca", options: ["Nike", "New Balance", "Adidas"] },
+  { name: "Género", options: ["Hombre", "Mujer", "Unisex"] },
+  { name: "Precio", options: ["80-100€", "110-120€", "130-140€", "150-160€"] },
+];
+
+// Iteramos sobre los filtros para crear botones y menús desplegables
+for (const filter of filters) {
+  // Crear el container que cubra el botón y el div con el dropdown
+  const divDropDownContainer = document.createElement("div");
+  divDropDownContainer.className = "dropDownContainer";
+
+  // Crear el botón que al hacer click desplegará el menú
+  const filterBtn = document.createElement("button");
+  filterBtn.textContent = filter.name;
+  filterBtn.classList.add("dropDownBtn");
+
+  // Crear el contenedor del dropdown
+  const dropdown = document.createElement("div");
+  dropdown.classList.add("dropDownContent");
+
+  // Añadir las opciones al dropdown
+  for (const option of filter.options) {
+    const optionElement = document.createElement("a");
+    optionElement.textContent = option;
+    optionElement.href = "#";
+    dropdown.appendChild(optionElement);
+  }
+
+  // Añadir el botón y el dropdown al container
+  divDropDownContainer.appendChild(filterBtn);
+  divDropDownContainer.appendChild(dropdown);
+
+  // Añadir el container al div de los filtros
+  divFilterButtons.appendChild(divDropDownContainer);
+}
+
+// Evento para los dropdowns (fuera del bucle)
+const filterBtns = document.querySelectorAll(".dropDownBtn");
+const menus = document.querySelectorAll(".dropDownContent");
+
+for (let i = 0; i < filterBtns.length; i++) {
+  filterBtns[i].addEventListener("click", function () {
+    // Cerrar otros dropdowns
+    for (let j = 0; j < menus.length; j++) {
+      if (j !== i) {
+        menus[j].classList.remove("show");
+      }
+    }
+    // Alternar el menú correspondiente
+    menus[i].classList.toggle("show");
+  });
+}
+
+// Crear el botón "Filtar"
+const filterButton = document.createElement("button");
+filterButton.textContent = "Filtrar";
+filterButton.setAttribute("id", "actionFilterBtn");
+divFilterButtons.appendChild(filterButton);
+
+// Crear el botón "Resetear Filtros"
+const resetButton = document.createElement("button");
+resetButton.textContent = "Resetear Filtros";
+resetButton.setAttribute("id", "actionResetBtn");
+divFilterButtons.appendChild(resetButton);
+
+// Crear la sección después de los botones de filtro
 const section = document.createElement("section");
 main.appendChild(section);
 
