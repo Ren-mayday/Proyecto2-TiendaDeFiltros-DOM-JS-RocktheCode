@@ -1,98 +1,114 @@
 const shoes = [
   {
-    brand: "New Original",
+    brand: "Nike Original",
     model: "Air Max",
     price: "120.00 €",
+    gender: "Unisex",
     img: "assets/Nike_Air_Max_1.png",
   },
   {
     brand: "New Balance",
     model: "408 ML408N",
     price: "80.00 €",
+    gender: "Hombre",
     img: "assets/New_Balance_408_Silver_ML408N_Running_Shoes.jpg",
   },
   {
     brand: "Nike Original",
     model: "Revolution",
     price: "90.00 €",
+    gender: "Mujer",
     img: "assets/Nike_Air_Max_Blue.png",
   },
   {
     brand: "Adidas ",
     model: "Boost Pure Puzzle",
     price: "100.00 €",
+    gender: "Mujer",
     img: "assets/Adidas_ZX_2K_Boost_Pure_Puzzle.jpeg",
   },
   {
     brand: "Adidas Original",
     model: "Campus",
     price: "120.00 €",
+    gender: "Unisex",
     img: "assets/Adidas_Campus.png",
   },
   {
     brand: "New Balance",
     model: "M1906RHA",
     price: "120.00 €",
+    gender: "Hombre",
     img: "assets/New_Balance_1906R_Grey_Black_M1906RHA.jpg",
   },
   {
     brand: "Nike Original",
     model: "Dunk Low",
     price: "100.00 €",
+    gender: "Unisex",
     img: "assets/Nike_Dunk_Low_Retro.png",
   },
   {
     brand: "Adidas Original",
     model: "Gazelle",
     price: "90.00 €",
+    gender: "Unisex",
     img: "assets/Adidas_Ivy_Park.jpeg",
   },
   {
     brand: "Nike Original",
     model: "Air Max SC",
     price: "150.00 €",
+    gender: "Hombre",
     img: "assets/Nike_Air_Max_SC.png",
   },
   {
     brand: "Adidas Original",
     model: "Kaptir 30",
     price: "120.00 €",
+    gender: "Unisex",
     img: "assets/Adidas_Kaptir30.jpeg",
   },
   {
     brand: "Nike Original",
     model: "Air Force",
     price: "130.00 €",
+    gender: "Unisex",
     img: "assets/Nike_Force_Low.png",
   },
   {
     brand: "New Balance",
     model: "Fresh Foam X Move",
     price: "100.00 €",
+    gender: "Hombre",
     img: "assets/New_Balance_Fresh_Foam_X_Move.jpeg",
   },
   {
     brand: "New Balance",
     model: "FuelCell RC Elite",
     price: "150.00 €",
+    gender: "Mujer",
     img: "assets/New_Balance_FuelCell_RC_Elite_White_Neo_Flame.jpg",
   },
   {
     brand: "Nike Original",
     model: "Full Force Low",
     price: "70.00 €",
+    gender: "Unisex",
     img: "assets/Nike_Air_Force.png",
   },
   {
     brand: "Nike Original",
     model: "Air Max SC",
     price: "160.00 €",
+    gender: "Hombre",
     img: "assets/Nike_Air_Max_SC_Black.png",
   },
   {
     brand: "Adidas Original",
     model: "Gazelle",
     price: "140.00 €",
+    gender: "Unisex",
     img: "assets/Adidas_Original_Gazelle.png",
   },
 ];
@@ -239,7 +255,7 @@ const filterBtns = document.querySelectorAll(".dropDownBtn");
 const menus = document.querySelectorAll(".dropDownContent");
 
 for (let i = 0; i < filterBtns.length; i++) {
-  filterBtns[i].addEventListener("click", function () {
+  filterBtns[i].addEventListener("", function () {
     // Cerrar otros dropdowns
     for (let j = 0; j < menus.length; j++) {
       if (j !== i) {
@@ -268,39 +284,43 @@ const section = document.createElement("section");
 main.appendChild(section);
 
 //! Paso 2: Creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
-for (let shoe of shoes) {
-  const divShoesCard = document.createElement("div"); // Div donde estará toda la info de las bambas
-  divShoesCard.className = "shoesCard";
+const renderShoes = (data) => {
+  for (let element of data) {
+    const divShoesCard = document.createElement("div"); // Div donde estará toda la info de las bambas
+    divShoesCard.className = "shoesCard";
 
-  const imgShoes = document.createElement("img"); // img de las bambas
-  imgShoes.className = "shoesPictures";
-  imgShoes.src = shoe.img; // Asignar la ruta de la imagen
-  imgShoes.alt = `${shoe.brand} ${shoe.model}`; // Texto alternativo para la imagen
+    const imgShoes = document.createElement("img"); // img de las bambas
+    imgShoes.className = "shoesPictures";
+    imgShoes.src = element.img; // Asignar la ruta de la imagen
+    imgShoes.alt = `${element.brand} ${element.model}`; // Texto alternativo para la imagen
 
-  const brandHeading = document.createElement("h2"); // Título con la marca
-  brandHeading.textContent = shoe.brand;
+    const brandHeading = document.createElement("h2"); // Título con la marca
+    brandHeading.textContent = element.brand;
 
-  const modelParagraph = document.createElement("p"); // Párrafo con el modelo
-  modelParagraph.textContent = `Modelo: ${shoe.model}`;
+    const modelParagraph = document.createElement("p"); // Párrafo con el modelo
+    modelParagraph.textContent = `Modelo: ${element.model}`;
 
-  const priceParagraph = document.createElement("p"); // Párrafo con el precio
-  priceParagraph.textContent = `Precio: ${shoe.price}`;
+    const priceParagraph = document.createElement("p"); // Párrafo con el precio
+    priceParagraph.textContent = `Precio: ${element.price}`;
 
-  const detailsDiv = document.createElement("div"); // Div para agrupar modelo y precio
-  detailsDiv.className = "details";
-  detailsDiv.appendChild(modelParagraph);
-  detailsDiv.appendChild(priceParagraph);
+    const detailsDiv = document.createElement("div"); // Div para agrupar modelo y precio
+    detailsDiv.className = "details";
+    detailsDiv.appendChild(modelParagraph);
+    detailsDiv.appendChild(priceParagraph);
 
-  const buyButton = document.createElement("button"); // Botón de compra
-  buyButton.textContent = "Comprar";
-  buyButton.className = "buy-btn";
+    const buyButton = document.createElement("button"); // Botón de compra
+    buyButton.textContent = "Comprar";
+    buyButton.className = "buy-btn";
 
-  // Construimos la tarjeta añadiendo los elementos en orden
-  divShoesCard.appendChild(imgShoes); // Añadir imagen primero
-  divShoesCard.appendChild(brandHeading); // Añadir marca
-  divShoesCard.appendChild(detailsDiv); // Añadir detalles (modelo y precio)
-  divShoesCard.appendChild(buyButton); // Añadir botón de compra
+    // Construimos la tarjeta añadiendo los elementos en orden
+    divShoesCard.appendChild(imgShoes); // Añadir imagen primero
+    divShoesCard.appendChild(brandHeading); // Añadir marca
+    divShoesCard.appendChild(detailsDiv); // Añadir detalles (modelo y precio)
+    divShoesCard.appendChild(buyButton); // Añadir botón de compra
 
-  // Añadimos el divShoesCard a la sección
-  section.appendChild(divShoesCard);
-}
+    // Añadimos el divShoesCard a la sección
+    section.appendChild(divShoesCard);
+  }
+};
+
+renderShoes(shoes);
