@@ -255,7 +255,7 @@ const filterBtns = document.querySelectorAll(".dropDownBtn");
 const menus = document.querySelectorAll(".dropDownContent");
 
 for (let i = 0; i < filterBtns.length; i++) {
-  filterBtns[i].addEventListener("", function () {
+  filterBtns[i].addEventListener("click", function () {
     // Cerrar otros dropdowns
     for (let j = 0; j < menus.length; j++) {
       if (j !== i) {
