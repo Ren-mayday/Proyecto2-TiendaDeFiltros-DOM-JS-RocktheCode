@@ -191,7 +191,7 @@ for (let index = 0; index < buttonNames.length; index++) {
   divNavRightSide.appendChild(navButton);
 }
 
-//? Creo elementos dentro del main
+//! Creo elementos dentro del main
 
 //! Paso 1: Selecciono el elemento main
 const main = document.querySelector("main");
@@ -267,12 +267,6 @@ for (let i = 0; i < filterBtns.length; i++) {
   });
 }
 
-// Crear el botón "Filtar"
-const filterButton = document.createElement("button");
-filterButton.textContent = "Filtrar";
-filterButton.setAttribute("id", "actionFilterBtn");
-divFilterButtons.appendChild(filterButton);
-
 // Crear el botón "Resetear Filtros"
 const resetButton = document.createElement("button");
 resetButton.textContent = "Resetear Filtros";
@@ -283,7 +277,7 @@ divFilterButtons.appendChild(resetButton);
 const section = document.createElement("section");
 main.appendChild(section);
 
-//! Paso 2: Creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
+//? Paso 2: Creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
 const renderShoes = (data) => {
   for (let element of data) {
     const divShoesCard = document.createElement("div"); // Div donde estará toda la info de las bambas
@@ -324,3 +318,127 @@ const renderShoes = (data) => {
 };
 
 renderShoes(shoes);
+
+//! Selecciono el elemento footer
+const footer = document.querySelector("footer");
+const divFooter = document.createElement("div");
+divFooter.className = "moreInfo";
+footer.appendChild(divFooter);
+
+//? Creo una función para cada título de mis listados del footer
+const createTitle = (text) => {
+  const h3 = document.createElement("h3");
+  h3.textContent = text;
+  return h3;
+};
+
+//? Creo una función para crear los div con la class section
+const createSection = (titleText, ulElement) => {
+  const section = document.createElement("div");
+  section.className = "section"; // Clase para la sección
+  section.appendChild(createTitle(titleText)); // Agregar el título
+  section.appendChild(ulElement); // Agregar el ul
+  return section;
+};
+
+//! Primer ul Compra con JD
+const ulShopInfo = document.createElement("ul");
+const jdInfo = [
+  {
+    text: "Guía de tallas",
+    url: "https://www.jdsports.es/customer-service/size-guide/",
+  },
+  {
+    text: "Buscador de Tiendas",
+    url: "https://www.jdsports.es/store-locator/all-stores/",
+  },
+  {
+    text: "Descuento por ser estudiante",
+    url: "https://www.jdsports.es/page/student-discount/",
+  },
+  {
+    text: "Calendario de lanzamientos",
+    url: "https://blog.jdsports.es/calendario-lanzamientos-sneakers/",
+  },
+  { text: "Inscríbete gratis a JDX", url: "https://www.jdsports.es/page/jdx/" },
+  { text: "JD Blog", url: "https://blog.jdsports.es/" },
+];
+
+for (let index = 0; index < jdInfo.length; index++) {
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.textContent = jdInfo[index].text;
+  a.href = jdInfo[index].url;
+  li.appendChild(a);
+  ulShopInfo.appendChild(li);
+}
+
+//! Segundo ul Atención al cliente
+const ulCustomerService = document.createElement("ul");
+const customerServiceInfo = [
+  { text: "Preguntas frecuentes", url: "https://www.jdsports.es/pages/faqs/" },
+  {
+    text: "Envíos y devoluciones",
+    url: "https://www.jdsports.es/page/delivery-returns/",
+  },
+  {
+    text: "Seguimiento de envío",
+    url: "https://www.jdsports.es/track-my-order/",
+  },
+  {
+    text: "contacto",
+    url: "https://www.jdsports.es/customer-service/contact/",
+  },
+];
+
+for (let index = 0; index < customerServiceInfo.length; index++) {
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.textContent = customerServiceInfo[index].text;
+  a.href = customerServiceInfo[index].url;
+  li.appendChild(a);
+  ulCustomerService.appendChild(li);
+}
+
+//! Tercer ul para aviso legal
+const ulLegalAdvice = document.createElement("ul");
+const legalAdviceInfo = [
+  {
+    text: "Términos y condiciones",
+    url: "https://www.jdsports.es/customer-service/terms/",
+  },
+  {
+    text: "Promociones y condiciones",
+    url: "https://www.jdsports.es/page/terminos-condiciones-promociones/",
+  },
+  {
+    text: "Política de privacidad",
+    url: "https://www.jdsports.es/customer-service/privacy/",
+  },
+  {
+    text: "Política de Cookies",
+    url: "https://www.jdsports.es/customer-service/cookies/",
+  },
+  {
+    text: "Resolución de litigos en línea",
+    url: "https://www.jdsports.es/customer-service/ue-platform/",
+  },
+  {
+    text: "Sistema interno de información del grupo JD - Whistleblowing",
+    url: "https://www.jdsports.es/customer-service/canal-sistema-interno-informacion-whistleblowing/",
+  },
+];
+
+for (let index = 0; index < legalAdviceInfo.length; index++) {
+  const li = document.createElement("li");
+  const a = document.createElement("a");
+  a.textContent = legalAdviceInfo[index].text;
+  a.href = legalAdviceInfo[index].url;
+  li.appendChild(a);
+  ulLegalAdvice.appendChild(li);
+}
+
+//! Agrego los div.section con los títulos y los ul al div del footer
+divFooter.appendChild(createSection("Compra con JD", ulShopInfo));
+divFooter.appendChild(createSection("Atención al cliente", ulCustomerService));
+divFooter.appendChild(createSection("Aviso Legal", ulLegalAdvice));

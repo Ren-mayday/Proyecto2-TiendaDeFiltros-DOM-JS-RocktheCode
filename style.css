@@ -309,3 +309,58 @@ section {
     width: 90%; /* Ajusta el ancho para móviles */
   }
 }
+
+/* Estilos básicos para el footer */
+footer {
+  background-color: black;
+  padding: 20px;
+  text-align: center;
+}
+
+h3 {
+  color: white;
+}
+
+/* Flexbox para el contenedor .moreInfo */
+.moreInfo {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto; /* Centrar el contenido horizontalmente */
+  padding: 20px;
+  margin-top: 20px;
+}
+
+/* Cada .section ocupa un tercio del espacio disponible */
+.section {
+  width: 30%; /* Cada sección toma el 30% del ancho */
+  box-sizing: border-box;
+  text-align: left;
+}
+
+/* Estilos para el título de las secciones */
+.section h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* Estilos para la lista ul */
+.section ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* Estilos para los enlaces */
+.section ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* Estilos responsive para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .section {
+    width: 100%; /* Cada sección toma el 100% del ancho en pantallas pequeñas */
+    margin-bottom: 20px; /* Espacio entre las secciones */
+  }
+}
