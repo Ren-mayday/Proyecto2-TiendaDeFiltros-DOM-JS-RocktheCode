@@ -15,10 +15,10 @@ const shoes = [
   },
   {
     brand: "Nike Original",
-    model: "Revolution",
-    price: "90.00 €",
-    gender: "Mujer",
-    img: "assets/Nike_Air_Max_Blue.png",
+    model: "Air Max FD9082-001",
+    price: "150.00 €",
+    gender: "Hombre",
+    img: "assets/Nike_Air_Max_2.png",
   },
   {
     brand: "Adidas ",
@@ -233,12 +233,16 @@ for (const filter of filters) {
   // Crear el contenedor del dropdown
   const dropdown = document.createElement("div");
   dropdown.classList.add("dropDownContent");
+  dropdown.setAttribute("data-filter", filter.name.toLowerCase()); // Agregar data-filter con el nombre del filtro en minúsculas
 
   // Añadir las opciones al dropdown
   for (const option of filter.options) {
     const optionElement = document.createElement("a");
     optionElement.textContent = option;
     optionElement.href = "#";
+    optionElement.classList.add("filter-option"); // Agregar clase para estilo y selección
+    optionElement.setAttribute("data-filter", filter.name.toLowerCase()); // Agregar data-filter para identificar el filtro
+
     dropdown.appendChild(optionElement);
   }
 
@@ -318,6 +322,71 @@ const renderShoes = (data) => {
 };
 
 renderShoes(shoes);
+
+//? Funciones para los filtros
+//! Objeto para almacenar los valores seleccionados Marca, Género y Precio
+
+let selectedFilters = {
+  brand: null,
+  gender: null,
+  price: null,
+};
+
+// Selecciono todos los elementos de opciones de filtro
+document.querySelectorAll(".filter-option").forEach((option) => {
+  option.addEventListener("click", (event) => {
+    const filterName = event.target.getAttribute("data-filter");
+    const filterValue = event.target.textContent.trim(); // trim() para eliminar espacios innecesarios
+
+    // Actualizo los filtros seleccionados
+    if (filterName === "marca") {
+      selectedFilters.brand = filterValue;
+    } else if (filterName === "género") {
+      selectedFilters.gender = filterValue;
+    } else if (filterName === "precio") {
+      // Convertimos el rango de precios en un formato numérico
+      const priceRange = filterValue.split("-");
+      selectedFilters.price = priceRange
+        .map((price) => price.replace("€", "").trim())
+        .join("-");
+    }
+
+    // Llamamos a la función para filtrar y renderizar los productos
+    filterAndRenderShoes();
+
+    // Cierra el dropdown después de seleccionar una opción
+    event.target.closest(".dropDownContent").classList.remove("show");
+  });
+});
+
+const filterAndRenderShoes = () => {
+  const filteredShoes = shoes.filter((shoe) => {
+    let brandMatch = selectedFilters.brand
+      ? shoe.brand.includes(selectedFilters.brand)
+      : true;
+    let genderMatch = selectedFilters.gender
+      ? shoe.gender === selectedFilters.gender
+      : true;
+    let priceMatch = true;
+
+    if (selectedFilters.price) {
+      const [minPrice, maxPrice] = selectedFilters.price.split("-");
+      const shoePrice = parseFloat(shoe.price.replace("€", "").trim());
+      priceMatch =
+        shoePrice >= parseFloat(minPrice) && shoePrice <= parseFloat(maxPrice);
+    }
+
+    return brandMatch && genderMatch && priceMatch;
+  });
+
+  section.innerHTML = ""; // Limpiar la sección antes de renderizar
+  renderShoes(filteredShoes); // Volver a renderizar los zapatos filtrados
+};
+
+document.getElementById("actionResetBtn").addEventListener("click", () => {
+  selectedFilters = { brand: null, gender: null, price: null };
+  filterAndRenderShoes(); // Renderizar todos los zapatos de nuevo
+});
 
 //! Selecciono el elemento footer
 const footer = document.querySelector("footer");
