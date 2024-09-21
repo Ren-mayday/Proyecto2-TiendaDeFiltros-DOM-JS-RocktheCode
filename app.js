@@ -144,27 +144,27 @@ imgJdLogo.className = "leftSideMenu"; // le pongo el className
 imgJdLogo.src = "assets/JDLogo.jpg";
 header.appendChild(imgJdLogo); // Inserto el div dentro del header antes de mi nav
 
-//! Paso 2: Crear el elemento nav
+//! Paso 3: Crear el elemento nav
 const navCategories = document.createElement("nav");
-//! Paso 3: insertar el nav en el header
+//! Paso 4: insertar el nav en el header
 header.appendChild(navCategories);
 
-//! Paso 4: Crear un ul con la clase .navList
+//! Paso 5: Crear un ul con la clase .navList
 const ulCategoriesList = document.createElement("ul");
 ulCategoriesList.className = "categoriesList"; // le pongo un className
 navCategories.appendChild(ulCategoriesList); // inserto el ul dentro del nav
-//! Paso 5 con un for crear los li's y a (links) del ul navList
-for (menuCategoryList of menuCategoriesList) {
+//! Paso 6 con un for crear los li's y a (links) del ul navList
+for (const menuCategoryList of menuCategoriesList) {
   const liCategory = document.createElement("li"); // Creo el li
   liCategory.className = "liCategoryList"; // Le pongo un className
-  //! Paso 6: creo e inserto un a href dentro de mis li
+  //! Paso 7: creo e inserto un a href dentro de mis li
   const a = document.createElement("a"); // asigno y creo loa a
   a.href = menuCategoryList.href; // le pongo un href
   a.text = menuCategoryList.text; // le pongo texto cogiéndolo del array de objetos menuCategoriesList
 
-  //! Paso 7: Inserto los a dentro de los li
+  //! Paso 8: Inserto los a dentro de los li
   liCategory.appendChild(a);
-  //!Paso 8: Inserto los li dentro del ul
+  //!Paso 9: Inserto los li dentro del ul
   ulCategoriesList.appendChild(liCategory);
 }
 
@@ -173,15 +173,15 @@ const imgHamburgerMenu = document.createElement("img");
 imgHamburgerMenu.className = "hamburgerMenu";
 imgHamburgerMenu.src = "assets/hamburgermenu.png";
 navCategories.appendChild(imgHamburgerMenu);
-//!Paso 9: necesito un div con la clase .rigthSideMenu dentro del nav
+//!Paso 10: necesito un div con la clase .rigthSideMenu dentro del nav
 const divNavRightSide = document.createElement("div");
 divNavRightSide.className = "rightSideMenu";
 navCategories.appendChild(divNavRightSide);
 
-//!Paso 10: Creo un array buttonNames que serán los nombres de los botones
+//!Paso 11: Creo un array buttonNames que serán los nombres de los botones
 const buttonNames = ["⚙️", "🧺", "Perfil"];
 
-//! Paso 11: Con la ayuda de un for vamos a crear 3 botones extrayendo los nombres del array buttonNames
+//! Paso 12: Con la ayuda de un for creo 3 botones extrayendo los nombres del array buttonNames
 for (let index = 0; index < buttonNames.length; index++) {
   const navButton = document.createElement("button"); // asignar y crear el botón
 
@@ -192,9 +192,9 @@ for (let index = 0; index < buttonNames.length; index++) {
   divNavRightSide.appendChild(navButton);
 }
 
-//! Creo elementos dentro del main
+//! Aquí empiezan los elementos del main
 
-//! Paso 1: Selecciono el elemento main
+//! Paso 1: Selecciono el elemento main para crear los elementos que necesite
 const main = document.querySelector("main");
 
 //Div para la imagen después del header
@@ -221,7 +221,7 @@ const filters = [
 ];
 
 // Iteramos sobre los filtros para crear botones y menús desplegables
-for (const filter of filters) {
+for (let filter of filters) {
   // Crear el container que cubra el botón y el div con el dropdown
   const divDropDownContainer = document.createElement("div");
   divDropDownContainer.className = "dropDownContainer";
@@ -234,7 +234,7 @@ for (const filter of filters) {
   // Crear el contenedor del dropdown
   const dropdown = document.createElement("div");
   dropdown.classList.add("dropDownContent");
-  dropdown.setAttribute("data-filter", filter.name.toLowerCase()); // Agregar data-filter con el nombre del filtro en minúsculas
+  dropdown.setAttribute("data-filter", filter.name.toLowerCase()); // Agregar data-filter con el nombre del filtro en minúsculas sacando los datos del array filters
 
   // Añadir las opciones al dropdown
   for (const option of filter.options) {
@@ -244,10 +244,10 @@ for (const filter of filters) {
     optionElement.classList.add("filter-option"); // Agregar clase para estilo y selección
     optionElement.setAttribute("data-filter", filter.name.toLowerCase()); // Agregar data-filter para identificar el filtro
 
-    dropdown.appendChild(optionElement);
+    dropdown.appendChild(optionElement); // Insertar el tag a al div con la variable asignada dropdown (.dropDownContent)
   }
 
-  // Añadir el botón y el dropdown al container
+  // Añadir el botón y el dropdown al container (.dropDownContainer) que desplegará las opciones del array filters
   divDropDownContainer.appendChild(filterBtn);
   divDropDownContainer.appendChild(dropdown);
 
@@ -255,20 +255,28 @@ for (const filter of filters) {
   divFilterButtons.appendChild(divDropDownContainer);
 }
 
-// Evento para los dropdowns (fuera del bucle)
+// Evento para los dropdowns (fuera del bucle).  primero el botón y luego el menú desplegable
 const filterBtns = document.querySelectorAll(".dropDownBtn");
+//Selecciono todos los elementos con la clase .dropDownBtn y los almaceno en una variable llamada filterBtns
 const menus = document.querySelectorAll(".dropDownContent");
+// Selecciono todos los elementos con la clase .dropDownContent, que son los menús desplegables asociados con los botones y los almaceno en una variable llamada menu
 
-for (let i = 0; i < filterBtns.length; i++) {
-  filterBtns[i].addEventListener("click", function () {
-    // Cerrar otros dropdowns
-    for (let j = 0; j < menus.length; j++) {
-      if (j !== i) {
-        menus[j].classList.remove("show");
+for (let index = 0; index < filterBtns.length; index++) {
+  // En este bucle for recorre todos los botones en filterBtns. El bucle comienza en index = 0; y se ejecuta hasta que index sea igual al número de botones.
+  filterBtns[index].addEventListener("click", function () {
+    // Añado un event listener para cada botón en la lista filterBtns. Cuando el botón en la posición index es clicado, se ejecuta la función anónima
+    for (let indexJ = 0; indexJ < menus.length; indexJ++) {
+      // Inicio otro ciclo for anidado para recorrer todos los menús en la lista menus con la variable indexJ
+      if (indexJ !== index) {
+        //Si indexJ no es igual a index del botón clicado (es decir, si el menú no corresponde al botón clickado),
+        menus[indexJ].classList.remove("show");
+        // se elimina la clase show de ese menú. Esto asegura que sólo se muestre el menú relacionado con el botón clicado
       }
     }
     // Alternar el menú correspondiente
-    menus[i].classList.toggle("show");
+    menus[index].classList.toggle("show");
+    // Añade o elimina (alterna) la clase show al menú en la posición index (el menú asociado al botón clicado). Si el menú ya está abierto, lo cerrará; si está cerrado, lo abrirá.
+    //Abre o cierra el menú correspondiente al botón clicado
   });
 }
 
@@ -276,13 +284,13 @@ for (let i = 0; i < filterBtns.length; i++) {
 const resetButton = document.createElement("button");
 resetButton.textContent = "Resetear Filtros";
 resetButton.setAttribute("id", "actionResetBtn");
-divFilterButtons.appendChild(resetButton);
+divFilterButtons.appendChild(resetButton); // Inserto el botón Resetear Filtros en el divFilterButtons
 
 // Crear la sección después de los botones de filtro
 const section = document.createElement("section");
-main.appendChild(section);
+main.appendChild(section); // Inserto la section en el main
 
-//? Paso 2: Creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
+//? Paso 2: Creo una función que renderizará los datos del array shoes. Dentro creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
 const renderShoes = (data) => {
   if (data.length) {
     for (let element of data) {
@@ -323,7 +331,8 @@ const renderShoes = (data) => {
     }
   } else {
     const message = document.createElement("p");
-    message.textContent = "No se han encontrado zapatillas";
+    message.textContent =
+      "No se han encontrado las zapatillas con estas características, pero te mostramos unos sugeridos";
 
     section.appendChild(message);
   }
@@ -331,60 +340,77 @@ const renderShoes = (data) => {
 
 renderShoes(shoes);
 
-//? Funciones para los filtros
-//! Objeto para almacenar los valores seleccionados Marca, Género y Precio
+//? Paso 3: Funciones para los filtros
 
+//! Objeto para almacenar los valores seleccionados Marca, Género y Precio, todas inicializadas con valor null. Este objeto será utilizado para almacenar las opciones de filtro seleccionadas por el usuario
 let selectedFilters = {
   brand: null,
   gender: null,
   price: null,
-};
+}; //! El objeto selectedFilters mantiene el estado de los filtros aplicados
 
-// Selecciono todos los elementos de opciones de filtro
+// Selecciono todos los elementos de opciones de filtro que tienen clase .filter-option (estos son los elementos que el usuario puede hacer clic para aplicar filtros)
 document.querySelectorAll(".filter-option").forEach((option) => {
+  // Almacena todos esos elementos en una lista y utiliza forEach para iterar sobre cada uno de ellos
   option.addEventListener("click", (event) => {
+    // Agrego un event listener a cada opción de filtro, este escucha el evento click y ejecuta la función cada vez que el usuario hace clic en una opción
+    // Cada vez que el usuario selecciona una opción de filtro, la función se ejecuta con el evento como argumento
     const filterName = event.target.getAttribute("data-filter");
+    // Selecciono el atributo data-filter del elemento en el que el usuario haga click (event.target), que indica si es un filtro Marca, Género o Precio
+    // La variable filterName contendrá el tipo de filtro
     const filterValue = event.target.textContent.trim(); // trim() para eliminar espacios innecesarios
+    // filterValue contendrá los valores seleccionados por el usuario
 
     // Actualizo los filtros seleccionados
     if (filterName === "marca") {
-      selectedFilters.brand = filterValue;
+      // Si el filtro seleccionado es "marca",
+      selectedFilters.brand = filterValue; // actualiza la propiedad brand
     } else if (filterName === "género") {
-      selectedFilters.gender = filterValue;
+      // Si el ciltro es "género",
+      selectedFilters.gender = filterValue; // actualiza la propiedad a gender
     } else if (filterName === "precio") {
+      // si el filtro seleccionado es "precio", actualiza la propiedad a price
       // Convertimos el rango de precios en un formato numérico
-      const priceRange = filterValue.split("-");
+      const priceRange = filterValue.split("-"); // Creo la variable priceRange para almacenar el filterValue está dividiendo la cadena por el guión, separando los precios en dos elementos de un array
       selectedFilters.price = priceRange
-        .map((price) => price.replace("€", "").trim())
+        .map((price) => price.replace("€", "").trim()) // Cada elemento del array es procesado, se elimina el símbolo € y también los espacios en blanco alrededor de los números
         .join("-");
     }
 
-    // Llamamos a la función para filtrar y renderizar los productos
     filterAndRenderShoes();
+    // Llamamos a la función para filtrar y renderizar los productos
 
-    // Cierra el dropdown después de seleccionar una opción
     event.target.closest(".dropDownContent").classList.remove("show");
+    // Cierra el dropdown después de seleccionar una opción
   });
 });
 
 const filterAndRenderShoes = () => {
+  // Esta función filtra una lista de zapatos, el array (shoes) en función de (marca, género y rango de precio). Su propósito es filtrar la lista de zapatos y renderizarlos
   const filteredShoes = shoes.filter((shoe) => {
-    let brandMatch = selectedFilters.brand
-      ? shoe.brand.includes(selectedFilters.brand)
-      : true;
+    // Con el método filter() itera sobre el array shoes y devuelve un nuevo array filteredShoes que contiene sólo los zapatos que cumplen con los criterios del filtro
+    let brandMatch = selectedFilters.brand // Verifica si se ha seleccionado una marca en los filtros
+      ? shoe.brand.includes(selectedFilters.brand) // Si hay una marca seleccionada, evalúa si la marca del zapato (shoe.brand) incluye la marca seleccionada
+      : true; // Si no se ha seleccionado ninguna marca, brandMatch se establece en true, lo cual, no se filtrará por marca
     let genderMatch = selectedFilters.gender
       ? shoe.gender === selectedFilters.gender
       : true;
-    let priceMatch = true;
+    let priceMatch = true; // Establezco priceMatch en true por defecto, lo cual, si no se selecciona ningún rango de precios, todos los zapatos apsarán el filtro de precio
 
     if (selectedFilters.price) {
+      // Verifica si se ha seleccionado un rango de precios
       const [minPrice, maxPrice] = selectedFilters.price.split("-");
+      //Si se selecciona un rango de precios, este se divide en minPrice (precio mínimo) y maxPrice (precio máximo) utilizando el método .split("-")
       const shoePrice = parseFloat(shoe.price.replace("€", "").trim());
+      // Convierte el precio del zapato (shoe.price) de una cadena de texto a un número flotante (removiendo el símbolo de euro "€" y los espacios en blanco)
       priceMatch =
         shoePrice >= parseFloat(minPrice) && shoePrice <= parseFloat(maxPrice);
+      // Se comprueba si el precio del zapato (shoePrice) está dentro del rango de precios seleccionado, y actualiza priceMatch a true o false dependiendo de si cumple esta condición.
     }
 
     return brandMatch && genderMatch && priceMatch;
+    // Devuelve true si el zapato cumple con los tres criterios de filtro (marca, género y precio), lo que significa que será incluido en el arreglo filteredShoes.
+    //Si alguna de estas condiciones es false, el zapato no se incluirá en el array filtrado.
   });
 
   section.innerHTML = ""; // Limpiar la sección antes de renderizar
@@ -396,7 +422,7 @@ document.getElementById("actionResetBtn").addEventListener("click", () => {
   filterAndRenderShoes(); // Renderizar todos los zapatos de nuevo
 });
 
-//! Selecciono el elemento footer
+//! Aquí empiezan los elementos del footer Paso 1: Selecciono el elemento footer
 const footer = document.querySelector("footer");
 const divFooter = document.createElement("div");
 divFooter.className = "moreInfo";
