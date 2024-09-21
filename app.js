@@ -1,3 +1,4 @@
+// Array de productos, que son los que se pintarán en el navegador
 const shoes = [
   {
     brand: "Nike Original",
@@ -283,41 +284,48 @@ main.appendChild(section);
 
 //? Paso 2: Creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
 const renderShoes = (data) => {
-  for (let element of data) {
-    const divShoesCard = document.createElement("div"); // Div donde estará toda la info de las bambas
-    divShoesCard.className = "shoesCard";
+  if (data.length) {
+    for (let element of data) {
+      const divShoesCard = document.createElement("div"); // Div donde estará toda la info de las bambas
+      divShoesCard.className = "shoesCard";
 
-    const imgShoes = document.createElement("img"); // img de las bambas
-    imgShoes.className = "shoesPictures";
-    imgShoes.src = element.img; // Asignar la ruta de la imagen
-    imgShoes.alt = `${element.brand} ${element.model}`; // Texto alternativo para la imagen
+      const imgShoes = document.createElement("img"); // img de las bambas
+      imgShoes.className = "shoesPictures";
+      imgShoes.src = element.img; // Asignar la ruta de la imagen
+      imgShoes.alt = `${element.brand} ${element.model}`; // Texto alternativo para la imagen
 
-    const brandHeading = document.createElement("h2"); // Título con la marca
-    brandHeading.textContent = element.brand;
+      const brandHeading = document.createElement("h2"); // Título con la marca
+      brandHeading.textContent = element.brand;
 
-    const modelParagraph = document.createElement("p"); // Párrafo con el modelo
-    modelParagraph.textContent = `Modelo: ${element.model}`;
+      const modelParagraph = document.createElement("p"); // Párrafo con el modelo
+      modelParagraph.textContent = `Modelo: ${element.model}`;
 
-    const priceParagraph = document.createElement("p"); // Párrafo con el precio
-    priceParagraph.textContent = `Precio: ${element.price}`;
+      const priceParagraph = document.createElement("p"); // Párrafo con el precio
+      priceParagraph.textContent = `Precio: ${element.price}`;
 
-    const detailsDiv = document.createElement("div"); // Div para agrupar modelo y precio
-    detailsDiv.className = "details";
-    detailsDiv.appendChild(modelParagraph);
-    detailsDiv.appendChild(priceParagraph);
+      const detailsDiv = document.createElement("div"); // Div para agrupar modelo y precio
+      detailsDiv.className = "details";
+      detailsDiv.appendChild(modelParagraph);
+      detailsDiv.appendChild(priceParagraph);
 
-    const buyButton = document.createElement("button"); // Botón de compra
-    buyButton.textContent = "Comprar";
-    buyButton.className = "buy-btn";
+      const buyButton = document.createElement("button"); // Botón de compra
+      buyButton.textContent = "Comprar";
+      buyButton.className = "buy-btn";
 
-    // Construimos la tarjeta añadiendo los elementos en orden
-    divShoesCard.appendChild(imgShoes); // Añadir imagen primero
-    divShoesCard.appendChild(brandHeading); // Añadir marca
-    divShoesCard.appendChild(detailsDiv); // Añadir detalles (modelo y precio)
-    divShoesCard.appendChild(buyButton); // Añadir botón de compra
+      // Construimos la tarjeta añadiendo los elementos en orden
+      divShoesCard.appendChild(imgShoes); // Añadir imagen primero
+      divShoesCard.appendChild(brandHeading); // Añadir marca
+      divShoesCard.appendChild(detailsDiv); // Añadir detalles (modelo y precio)
+      divShoesCard.appendChild(buyButton); // Añadir botón de compra
 
-    // Añadimos el divShoesCard a la sección
-    section.appendChild(divShoesCard);
+      // Añadimos el divShoesCard a la sección
+      section.appendChild(divShoesCard);
+    }
+  } else {
+    const message = document.createElement("p");
+    message.textContent = "No se han encontrado zapatillas";
+
+    section.appendChild(message);
   }
 };
 
