@@ -6,14 +6,48 @@
   font-family: "Roboto", sans-serif;
 }
 
+:root {
+  /*Colors*/
+  --primary-color: #f2f2f2;
+  --secondary-color: #000;
+  --tertiary-color: #fff852;
+  --dropdownbtn-background-color: #f6f6f6;
+  --dropdowncontent-background-color: #f1f1f1;
+  --shoescard-background-color: #f9f9f9;
+  --shoescard-border-color: #d3d3d3;
+  --dropdowncontent-hover-color: #ddd;
+  --footer-text-color: #fff;
+
+  /*Border radius*/
+  --border-radius: 5px;
+
+  /*Spacing*/
+
+  --margin-s: 10px;
+  --margin-m: 20px;
+  --margin-l: 25px;
+
+  --padding-xs: 5px;
+  --padding-s: 10px;
+  --padding-m: 12px;
+  --padding-l: 16px;
+  --padding-xl: 20px;
+  --padding-xxl: 40px;
+
+  --gap-xs: 5px;
+  --gap-s: 10px;
+  --gap-m: 15px;
+  --gap--l: 20px;
+}
+
 body {
-  background-color: #f2f2f2;
+  background-color: var(--primary-color);
 }
 
 header {
-  background-color: #000;
+  background-color: var(--secondary-color);
   display: flex;
-  padding: 40px;
+  padding: var(--padding-xxl);
   width: 100%;
 }
 
@@ -41,7 +75,7 @@ nav {
 }
 
 .liCategoryList a {
-  color: #f2f2f2;
+  color: var(--primary-color);
   text-decoration: none;
   font-weight: 600;
 }
@@ -50,22 +84,22 @@ nav {
   display: flex;
   justify-content: space-evenly;
   width: 20%;
-  gap: 10px;
+  gap: var(--gap-s);
 }
 
 .btn-1,
 .btn-2 {
   height: 30px;
   width: 30px;
-  padding: 5px;
-  border-radius: 5px;
+  padding: var(--padding-xs);
+  border-radius: var(--border-radius);
   border-style: none;
 }
 
 .btn-1:hover,
 .btn-2:hover,
 .btn-3:hover {
-  background-color: #fff852;
+  background-color: var(--tertiary-color);
 }
 
 button {
@@ -74,25 +108,27 @@ button {
 
 @media (max-width: 600px) {
   .categoriesList {
-    gap: 15px;
+    gap: var(--gap-m);
   }
 }
 
 @media (max-width: 500px) {
   header {
-    padding: 10px;
+    padding: var(--padding-s);
   }
 
   nav {
     flex-direction: column; /* Cambia la dirección del flex para pantallas pequeñas */
     align-items: flex-start; /* Alinea los elementos al inicio */
-    padding: 10px; /* Añadir padding para que no esté pegado a los bordes */
+    padding: var(
+      --padding-s
+    ); /* Añadir padding para que no esté pegado a los bordes */
   }
 
   .rightSideMenu {
     width: 100%; /* Ajusta el ancho para que ocupe el espacio disponible */
     justify-content: space-around; /* Distribuye los botones de manera uniforme */
-    margin-top: 25px; /* Añadir margen superior si es necesario */
+    margin-top: var(--margin-l); /* Añadir margen superior si es necesario */
   }
 
   .categoriesList {
@@ -110,12 +146,16 @@ button {
 /* Media Query para pantallas muy pequeñas (375px y menos) */
 @media (max-width: 414px) {
   header {
-    padding: 5px; /* Reducir aún más el padding para pantallas extremadamente pequeñas */
+    padding: var(
+      --padding-xs
+    ); /* Reducir aún más el padding para pantallas extremadamente pequeñas */
   }
 
   .rightSideMenu {
     width: 100%; /* Asegura que el contenedor derecho ocupe todo el ancho */
-    gap: 5px; /* Reduce el espacio entre los botones si es necesario */
+    gap: var(
+      --gap-xs
+    ); /* Reduce el espacio entre los botones si es necesario */
   }
 
   .hamburgerMenu {
@@ -142,7 +182,7 @@ button {
     #a49e9c,
     #bfbcb9
   );
-  padding: 20px;
+  padding: var(--padding-xl);
 }
 
 .imgCover {
@@ -154,32 +194,32 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-top: 20px;
+  gap: var(--gap-s);
+  margin-top: var(--margin-m);
   position: relative; /* Necesario para el posicionamiento absoluto del dropdown */
 }
 
 /* Dropdown Button */
 .dropDownBtn {
-  background-color: #f6f6f6;
-  color: black;
-  padding: 10px 20px;
+  background-color: var(--dropdownbtn-background-color);
+  color: var(--secondary-color);
+  padding: var(--padding-s) var(--padding-xl);
   border: 2px solid #d3d3d3;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: var(--margin-s);
 }
 
 .dropDownBtn:hover {
-  background-color: #fff852;
+  background-color: var(--tertiary-color);
 }
 
-/* Dropdown Content (Hidden by Default) */
+/* Dropdown Content (Hidden by Default) f1*/
 .dropDownContent {
   display: none;
   position: absolute;
-  background-color: #f1f1f1;
+  background-color: var(--dropdowncontent-background-color);
   min-width: 110px;
   border-radius: 5px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -187,15 +227,15 @@ button {
 
 /* Links inside the dropdown */
 .dropDownContent a {
-  color: #000;
-  padding: 12px 16px;
+  color: var(--secondary-color);
+  padding: var(--padding-m) var(--padding-l);
   text-decoration: none;
   display: block;
 }
 
 /* Change color of dropdown links on hover */
 .dropDownContent a:hover {
-  background-color: #ddd;
+  background-color: var(--dropdowncontent-hover-color);
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -205,41 +245,43 @@ button {
 
 #actionFilterBtn,
 #actionResetBtn {
-  background-color: #f6f6f6; /* Fondo blanco */
-  color: black; /* Texto negro */
-  padding: 10px 20px;
+  background-color: var(--dropdownbtn-background-color); /* Fondo blanco */
+  color: var(--secondary-color); /* Texto negro */
+  padding: var(--padding-s) var(--padding-xl);
   border: 2px solid #d3d3d3; /* Borde gris claro */
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: var(--margin-s);
 }
 
 #actionFilterBtn:hover,
 #actionResetBtn:hover {
-  background-color: #fff852;
+  background-color: var(--tertiary-color);
 }
 
 section {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  gap: var(--gap--l);
+  margin-top: var(--margin-m);
+  margin-bottom: var(--margin-m);
 }
 
 .shoesCard {
   width: 22%;
   border-style: solid; /* Estilo de borde sólido */
   border-width: 1px; /* Grosor del borde, ajusta a 1px para que sea fino */
-  border-color: #d3d3d3; /* Color del borde, un gris claro */
-  padding: 10px; /* Añadir un poco de espacio interno, opcional */
-  margin: 10px; /* Espacio externo entre las tarjetas, opcional */
+  border-color: var(
+    --shoescard-border-color
+  ); /* Color del borde, un gris claro */
+  padding: var(--padding-s); /* Añadir un poco de espacio interno, opcional */
+  margin: var(--margin-s); /* Espacio externo entre las tarjetas, opcional */
   border-radius: 5px; /* Esquinas redondeadas, opcional */
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para el contenedor */
-  background-color: #f9f9f9; /* Fondo claro */
+  background-color: var(--shoescard-background-color); /* Fondo claro */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -249,7 +291,7 @@ section {
   text-align: left;
   font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: var(--margin-s);
 }
 
 .shoesCard p {
@@ -278,18 +320,20 @@ section {
 
 /* Estilos para el botón comprar */
 .buy-btn {
-  background-color: #f6f6f6; /* Fondo blanco */
-  color: black; /* Texto negro */
-  padding: 10px 20px;
+  background-color: var(--dropdownbtn-background-color); /* Fondo blanco */
+  color: var(--secondary-color); /* Texto negro */
+  padding: var(--padding-s) var(--padding-xl);
   border: 2px solid #d3d3d3; /* Borde gris claro */
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: var(--margin-s);
 }
 
 .buy-btn:hover {
-  background-color: #fff852; /* Fondo amarillo más oscuro al hacer hover */
+  background-color: var(
+    --tertiary-color
+  ); /* Fondo amarillo más oscuro al hacer hover */
 }
 
 /* Media Query para Tablets */
@@ -313,13 +357,13 @@ section {
 
 /* Estilos básicos para el footer */
 footer {
-  background-color: black;
-  padding: 20px;
+  background-color: var(--secondary-color);
+  padding: var(--padding-s);
   text-align: center;
 }
 
 h3 {
-  color: white;
+  color: var(--footer-text-color);
 }
 
 /* Flexbox para el contenedor .moreInfo */
@@ -329,7 +373,7 @@ h3 {
   flex-wrap: wrap;
   max-width: 1200px;
   margin: 0 auto; /* Centrar el contenido horizontalmente */
-  padding: 20px;
+  padding: var(--padding-xl);
   margin-top: 20px;
 }
 
@@ -342,7 +386,7 @@ h3 {
 
 /* Estilos para el título de las secciones */
 .section h3 {
-  margin-bottom: 10px;
+  margin-bottom: var(--margin-s);
   font-size: 18px;
 }
 
@@ -355,13 +399,17 @@ h3 {
 /* Estilos para los enlaces */
 .section ul li a {
   text-decoration: none;
-  color: #fff;
+  color: var(--footer-text-color);
+}
+
+.section a:hover {
+  color: var(--dropdowncontent-hover-color);
 }
 
 /* Estilos responsive para pantallas más pequeñas */
 @media (max-width: 768px) {
   .section {
     width: 100%; /* Cada sección toma el 100% del ancho en pantallas pequeñas */
-    margin-bottom: 20px; /* Espacio entre las secciones */
+    margin-bottom: var(--margin-m); /* Espacio entre las secciones */
   }
 }
