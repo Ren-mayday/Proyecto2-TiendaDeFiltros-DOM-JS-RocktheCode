@@ -336,6 +336,19 @@ section {
   ); /* Fondo amarillo más oscuro al hacer hover */
 }
 
+#alternativeMessage {
+  background-color: rgba(252, 222, 4, 0.25); /* 25% opaco, 75% transparente */
+  position: relative;
+  z-index: 15; /* Está por debajo de los botones de filtro, pero por encima de las tarjetas */
+  margin-top: var(
+    --margin-s
+  ); /* Ajusta el espacio debajo de los botones de filtro */
+  padding: var(--padding-s);
+  border-radius: var(--border-radius);
+  text-align: center;
+  width: 100%;
+}
+
 /* Media Query para Tablets */
 @media (max-width: 1024px) and (min-width: 735px) {
   .shoesCard {
