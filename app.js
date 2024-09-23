@@ -1,3 +1,7 @@
+//! Comentarios de creación de elementos para el DOM
+//? Comentarios con funciones
+// Comentarios para explicar con más detalles qué hace un bucle, condicional, métodos, etc.
+
 // Array de productos, que son los que se pintarán en el navegador
 const shoes = [
   {
@@ -290,51 +294,77 @@ divFilterButtons.appendChild(resetButton); // Inserto el botón Resetear Filtros
 const section = document.createElement("section");
 main.appendChild(section); // Inserto la section en el main
 
-//? Paso 2: Creo una función que renderizará los datos del array shoes. Dentro creo un div con la clase .shoesCard que se va a repetir tantas veces el array shoes lo requiera
+//? Paso 2: Creo la función renderShoesCard para crear los elementos de la "card" de información de los zapatos, esta función en sí solamente creará 1, más adelante crearé un bucle para que se repitan todos los objetos del array de shoes
+const renderShoeCard = (element) => {
+  // coge como argumento element, que representa un objeto que contiene la información sobre un zapato (marca, modelo, precio, etc)
+  const divShoesCard = document.createElement("div"); // Creo el div donde aparecerá toda la info. de los zapatos
+  divShoesCard.className = "shoesCard"; // Inserto el div y le pongo un class .shoesCard
+
+  const imgShoes = document.createElement("img"); // Creo el elemento img
+  imgShoes.className = "shoesPictures"; // Le pongo un class .shoesPictures
+  imgShoes.src = element.img; // Le coloco el source de la imagen
+  imgShoes.alt = `${element.brand} ${element.model}`; // Le coloco el alt, marca y modelo
+
+  const brandHeading = document.createElement("h2"); // Creo el título de las zapatillas
+  brandHeading.textContent = element.brand; // Inserto el título que será la marca
+
+  const modelParagraph = document.createElement("p"); // Creo la p que indicará el modelo
+  modelParagraph.textContent = `Modelo: ${element.model}`; // Le inserto el texto visible que será la marca
+
+  const priceParagraph = document.createElement("p"); // Crep la p del precio
+  priceParagraph.textContent = `Precio: ${element.price}`; // Le inserto el texto visible que será precio
+
+  const detailsDiv = document.createElement("div"); // Creo el div donde estarán los detalles de la marca y del precio
+  detailsDiv.className = "details"; // Le pongo un class .details
+  detailsDiv.appendChild(modelParagraph); // Inserto el detailsDiv con class .details en la p del modelo
+  detailsDiv.appendChild(priceParagraph); // Inserto el detailsDiv con class .details en la p del precio (en este div estarán estos dos elementos)
+
+  const buyButton = document.createElement("button"); // Creo el botón que estará dentro del div de shoesCard
+  buyButton.textContent = "Comprar"; // Le añado el texto visible Comprar
+  buyButton.className = "buy-btn"; // le añado un class
+
+  divShoesCard.appendChild(imgShoes); // Inserto la imagen en el div de shoesCard
+  divShoesCard.appendChild(brandHeading); // Inserto el título en el div de shoesCard
+  divShoesCard.appendChild(detailsDiv); // Inserto el div con la info de modelo y precio en el div de shoesCard
+  divShoesCard.appendChild(buyButton); // Inserto el botón en el div de shoesCard
+
+  return divShoesCard;
+};
+
+//? Paso 2: Creo una función que renderizará los datos del array shoes.
 const renderShoes = (data) => {
   if (data.length) {
+    // Condicional si esto es true...
     for (let element of data) {
-      const divShoesCard = document.createElement("div"); // Div donde estará toda la info de las bambas
-      divShoesCard.className = "shoesCard";
-
-      const imgShoes = document.createElement("img"); // img de las bambas
-      imgShoes.className = "shoesPictures";
-      imgShoes.src = element.img; // Asignar la ruta de la imagen
-      imgShoes.alt = `${element.brand} ${element.model}`; // Texto alternativo para la imagen
-
-      const brandHeading = document.createElement("h2"); // Título con la marca
-      brandHeading.textContent = element.brand;
-
-      const modelParagraph = document.createElement("p"); // Párrafo con el modelo
-      modelParagraph.textContent = `Modelo: ${element.model}`;
-
-      const priceParagraph = document.createElement("p"); // Párrafo con el precio
-      priceParagraph.textContent = `Precio: ${element.price}`;
-
-      const detailsDiv = document.createElement("div"); // Div para agrupar modelo y precio
-      detailsDiv.className = "details";
-      detailsDiv.appendChild(modelParagraph);
-      detailsDiv.appendChild(priceParagraph);
-
-      const buyButton = document.createElement("button"); // Botón de compra
-      buyButton.textContent = "Comprar";
-      buyButton.className = "buy-btn";
-
-      // Construimos la tarjeta añadiendo los elementos en orden
-      divShoesCard.appendChild(imgShoes); // Añadir imagen primero
-      divShoesCard.appendChild(brandHeading); // Añadir marca
-      divShoesCard.appendChild(detailsDiv); // Añadir detalles (modelo y precio)
-      divShoesCard.appendChild(buyButton); // Añadir botón de compra
-
-      // Añadimos el divShoesCard a la sección
-      section.appendChild(divShoesCard);
-    }
+      const shoeCard = renderShoeCard(element);
+      section.appendChild(shoeCard);
+    } // for of, llama a la función de renderShoesCard para cada objeto en el array de data, así se crea una tarjeta para cada producto (zapato) y se le añade ala sección correspondiente del DOM
   } else {
-    const message = document.createElement("p");
-    message.textContent =
-      "No se han encontrado las zapatillas con estas características, pero te mostramos unos sugeridos";
+    // en caso contrario...
+    const message = document.createElement("p"); // creo la p que dará un mensaje la usuario en caso que no exista un producto con los filtros que ha escogido el usuario
+    message.setAttribute("id", "alternativeMessage"); // Le pongo un ID para que en CSS lo pueda identificar con más facilidad
+    message.textContent = // Añado el texto visible para el usuario
+      "No se han encontrado las zapatillas con estas características, pero te mostramos otros productos sugeridos";
 
-    section.appendChild(message);
+    section.appendChild(message); // Inserto el mensaje en la section
+
+    // Creo un Set vacío para los zapatos sugeridos
+    let randomShoesSet = new Set();
+
+    // Bucle while hasta que el Set tenga tres elementos únicos
+    while (randomShoesSet.size < 3) {
+      let randomIndex = Math.floor(Math.random() * shoes.length); // Fórmula para que me de un número aleatorio en relación a la longitud de mi array shoes
+      randomShoesSet.add(shoes[randomIndex]); // Le añado a mi Set un objeto del array shoes en la posición randomIndex
+    }
+
+    // Convierto el Set en un array
+    let randomShoesArray = Array.from(randomShoesSet);
+
+    // Renderizo las sugerencias usando la función
+    for (let element of randomShoesArray) {
+      const shoeCard = renderShoeCard(element); // Llamo a la función renderShoesCard para que me renderice los divs con toda la info. de mis zapatillas
+      section.appendChild(shoeCard); // Lo inserto en la section
+    }
   }
 };
 
